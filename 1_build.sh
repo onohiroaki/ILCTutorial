@@ -3,8 +3,9 @@
 # Setup compilers and ROOT
 source /cvmfs/sft.cern.ch/lcg/views/LCG_97a/x86_64-centos7-gcc8-opt/setup.sh
 
-# Install latest Delphes 
+# Download latest Delphes 
 git clone https://github.com/delphes/delphes.git
+# Build Delphes 
 pushd delphes/
 	make -j 4
 	export DELPHES_DIR=$PWD
@@ -12,8 +13,9 @@ pushd delphes/
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DELPHES_DIR/lib
 	popd
 
-# Install latest LCIO (Data format for linear collider experiments) with delphes2lcio
+# Download latest LCIO (Data format for linear collider experiments) with delphes2lcio
 git clone https://github.com/iLCSoft/LCIO.git
+# Build and install LCIO 
 pushd LCIO
 	export LCIO=$PWD
 	export PATH=$PATH:$LCIO/bin
@@ -25,6 +27,8 @@ pushd LCIO
 		make -j 4 install
 		popd
 	
+	# Build and install delphes2lcio
+	# delphes2lcio is an application of LCIO in which we call Delphes object and write LICO output.
 	pushd examples/cpp/delphes2lcio/
 		mkdir build
 		pushd build
@@ -35,17 +39,25 @@ pushd LCIO
 	popd
 
 
-# Install delphes2lcio
-
 # Downlod example STDHEP files 
+#####################################
+## File naming scheme
+## E250  => sqrt(s) = 250 GeV 
+## e2e2h => mu mu higgs process
+## zz_sl => Z Z, semi-leptonic decays process
+## eL.pR => beam porlarization: left handed for electrons, right handed for positrons
+## eR.pL => beam porlarization: right handed for electrons, left handed for positrons
+#####################################
 hostname=`hostname`
 if [[ $hostname =~ cc.kek.jp ]] ;
 then
+	# Use existing files for KEKCC users.
 	ln -s /gpfs/group/ilc/grid/storm/prod/ilc/mc-dbd/generated/250-TDR_ws/higgs/E250-TDR_ws.Pe2e2h.Gwhizard-1_95.eL.pR.I106479.001.stdhep .
 	ln -s /gpfs/group/ilc/grid/storm/prod/ilc/mc-dbd/generated/250-TDR_ws/higgs/E250-TDR_ws.Pe2e2h.Gwhizard-1_95.eR.pL.I106480.001.stdhep .
 	ln -s /gpfs/group/ilc/grid/storm/prod/ilc/mc-dbd/generated/250-TDR_ws/4f/E250-TDR_ws.P4f_zz_sl.Gwhizard-1_95.eL.pR.I106575.001.stdhep .
 	ln -s /gpfs/group/ilc/grid/storm/prod/ilc/mc-dbd/generated/250-TDR_ws/4f/E250-TDR_ws.P4f_zz_sl.Gwhizard-1_95.eR.pL.I106576.001.stdhep .
 else
+	# Download for non KEKCC users.
 	wget http://osggridftp02.slac.stanford.edu:8080/sdf/group/lcddata/ilc/prod/ilc/mc-dbd/generated/250-TDR_ws/higgs/E250-TDR_ws.Pe2e2h.Gwhizard-1_95.eL.pR.I106479.001.stdhep
 	wget http://osggridftp02.slac.stanford.edu:8080/sdf/group/lcddata/ilc/prod/ilc/mc-dbd/generated/250-TDR_ws/higgs/E250-TDR_ws.Pe2e2h.Gwhizard-1_95.eR.pL.I106480.001.stdhep
 	wget http://osggridftp02.slac.stanford.edu:8080/sdf/group/lcddata/ilc/prod/ilc/mc-dbd/generated/250-TDR_ws/4f/E250-TDR_ws.P4f_zz_sl.Gwhizard-1_95.eL.pR.I106575.001.stdhep
