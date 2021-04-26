@@ -23,7 +23,6 @@ mv delphes_card_ILCgen_E250.P* delphes/cards/
 git clone https://github.com/iLCSoft/LCIO.git
 # Build and install LCIO 
 pushd LCIO
-	git checkout v02-15-01
 	export LCIO=$PWD
 	export PATH=$PATH:$LCIO/bin
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$LCIO/lib
