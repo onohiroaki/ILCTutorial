@@ -13,8 +13,8 @@ git clone https://github.com/delphes/delphes.git
 pushd delphes/
 	make -j 4
 	export DELPHES_DIR=$PWD
-	export PATH=$PATH:$DELPHES_DIR/bin
-	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DELPHES_DIR/lib
+	export PATH=$PATH:$DELPHES_DIR
+	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DELPHES_DIR
 	popd
 # move custom conf files into delphes card directory
 mv delphes_card_ILCgen_E250.P* delphes/cards/ 
