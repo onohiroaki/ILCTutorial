@@ -1,7 +1,11 @@
 #/bin/sh
 
-# Setup compilers and ROOT
-source /cvmfs/sft.cern.ch/lcg/views/LCG_97a/x86_64-centos7-gcc8-opt/setup.sh
+# Setup compilers
+source /cvmfs/sft.cern.ch/lcg/releases/gcc/8.2.0-3fa06/x86_64-centos7/setup.sh
+# Setup ROOT
+source /cvmfs/ilc.desy.de/sw/x86_64_gcc82_centos7/root/6.18.04/bin/thisroot.sh
+# Setup cmake 
+export PATH="/cvmfs/ilc.desy.de/sw/x86_64_gcc82_centos7/CMake/3.15.5/bin:$PATH"
 
 # Download latest Delphes 
 git clone https://github.com/delphes/delphes.git
@@ -12,18 +16,21 @@ pushd delphes/
 	export PATH=$PATH:$DELPHES_DIR/bin
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DELPHES_DIR/lib
 	popd
+# move custom conf files into delphes card directory
+mv delphes_card_ILCgen_E250.P* delphes/cards/ 
 
 # Download latest LCIO (Data format for linear collider experiments) with delphes2lcio
 git clone https://github.com/iLCSoft/LCIO.git
 # Build and install LCIO 
 pushd LCIO
+	git checkout v02-15-01
 	export LCIO=$PWD
 	export PATH=$PATH:$LCIO/bin
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$LCIO/lib
 	
 	mkdir build
 	pushd build
-		cmake ..
+		cmake -DCMAKE_CXX_STANDARD=17 -DBUILD_ROOTDICT=ON ..
 		make -j 4 install
 		popd
 	

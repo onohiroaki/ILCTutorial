@@ -1,5 +1,7 @@
 #/bin/sh
-source /cvmfs/sft.cern.ch/lcg/views/LCG_97a/x86_64-centos7-gcc8-opt/setup.sh
+source /cvmfs/sft.cern.ch/lcg/releases/gcc/8.2.0-3fa06/x86_64-centos7/setup.sh
+source /cvmfs/ilc.desy.de/sw/x86_64_gcc82_centos7/root/6.18.04/bin/thisroot.sh
+export PATH="/cvmfs/ilc.desy.de/sw/x86_64_gcc82_centos7/CMake/3.15.5/bin:$PATH"
 pushd delphes/
 export DELPHES_DIR=$PWD
 export PATH=$PATH:$DELPHES_DIR/bin
