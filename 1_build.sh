@@ -16,8 +16,6 @@ pushd delphes/
 	export PATH=$PATH:$DELPHES_DIR
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$DELPHES_DIR
 	popd
-# move custom conf files into delphes card directory
-mv delphes_card_ILCgen_E250.P* delphes/cards/ 
 
 # Download latest LCIO (Data format for linear collider experiments) with delphes2lcio
 git clone https://github.com/iLCSoft/LCIO.git
