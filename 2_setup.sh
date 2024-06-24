@@ -10,5 +10,5 @@ popd
 pushd LCIO
 export LCIO=$PWD
 export PATH=$PATH:$LCIO/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$LCIO/lib:${LD_LIBRARY_PATH}/lib64
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:$LCIO/lib:${LCIO}/lib64
 popd
