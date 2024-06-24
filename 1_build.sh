@@ -21,13 +21,13 @@ pushd delphes/
 git clone https://github.com/iLCSoft/LCIO.git
 # Build and install LCIO 
 pushd LCIO
-	export LCIO=$PWD
-	export PATH=$PATH:$LCIO/bin
-	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$LCIO/lib
+	export LCIO=${PWD}
+	export PATH=${PATH}:${LCIO}/bin
+	export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}/lib:$LD_LIBRARY_PATH:$LCIO/lib64
 	
 	mkdir build
 	pushd build
-		cmake -DCMAKE_CXX_STANDARD=17 -DBUILD_ROOTDICT=ON ..
+		cmake -DCMAKE_CXX_STANDARD=17 -DBUILD_ROOTDICT=ON -DCMAKE_INSTALL_PREFIX=${LCIO} ..
 		make -j 4 install
 		popd
 	
@@ -36,7 +36,7 @@ pushd LCIO
 	pushd examples/cpp/delphes2lcio/
 		mkdir build
 		pushd build
-			cmake -D LCIO_DIR=$LCIO ..
+			cmake -D LCIO_DIR=${LCIO} ..
 			make -j 4 install
 			popd
 		popd
