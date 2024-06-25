@@ -67,3 +67,23 @@ else
 	wget https://ild.ngt.ndu.ac.jp/mc-prod/tutorial/E250-TDR_ws.P4f_zz_sl.Gwhizard-1_95.eL.pR.I106575.001.stdhep
 	wget https://ild.ngt.ndu.ac.jp/mc-prod/tutorial/E250-TDR_ws.P4f_zz_sl.Gwhizard-1_95.eR.pL.I106576.001.stdhep
 fi
+
+# Change following option to true to download miniDST files
+useMiniDST=false
+# Select download source from DESY cloud or NDU server
+fromDESY=false
+if ${useMiniDST}; then
+    if ${fromDESY}; then
+	# Download miniDST files from DESY cloud server
+	wget https://desycloud.desy.de/index.php/s/5LmrjGWqziQfMe7/download/rv01-16-p10_250.sv01-14-01-p00.mILD_o1_v05.E250-TDR_ws.I106479.Pe2e2h.eL.pR-00001-ILDminiDST.slcio
+	wget https://desycloud.desy.de/index.php/s/3ZqPcGPELggW4bP/download/rv01-16-p10_250.sv01-14-01-p00.mILD_o1_v05.E250-TDR_ws.I106480.Pe2e2h.eR.pL-00001-ILDminiDST.slcio
+	wget https://desycloud.desy.de/index.php/s/9gKznqtSGcBKBWY/download/rv01-16-p10_250.sv01-14-01-p00.mILD_o1_v05.E250-TDR_ws.I106575.P4f_zz_sl.eL.pR-00001-ILDminiDST.slcio
+	wget https://desycloud.desy.de/index.php/s/3i3tj3adfMPfPaC/download/rv01-16-p10_250.sv01-14-01-p00.mILD_o1_v05.E250-TDR_ws.I106576.P4f_zz_sl.eR.pL-00001-ILDminiDST.slcio
+    else
+	# Download miniDST files from NDU server
+	wget https://ild.ngt.ndu.ac.jp/mc-prod/tutorial/rv01-16-p10_250.sv01-14-01-p00.mILD_o1_v05.E250-TDR_ws.I106479.Pe2e2h.eL.pR-00001-ILDminiDST.slcio
+	wget https://ild.ngt.ndu.ac.jp/mc-prod/tutorial/rv01-16-p10_250.sv01-14-01-p00.mILD_o1_v05.E250-TDR_ws.I106480.Pe2e2h.eR.pL-00001-ILDminiDST.slcio
+	wget https://ild.ngt.ndu.ac.jp/mc-prod/tutorial/rv01-16-p10_250.sv01-14-01-p00.mILD_o1_v05.E250-TDR_ws.I106575.P4f_zz_sl.eL.pR-00001-ILDminiDST.slcio
+	wget https://ild.ngt.ndu.ac.jp/mc-prod/tutorial/rv01-16-p10_250.sv01-14-01-p00.mILD_o1_v05.E250-TDR_ws.I106576.P4f_zz_sl.eR.pL-00001-ILDminiDST.slcio
+    fi
+fi
